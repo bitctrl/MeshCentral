@@ -47,6 +47,8 @@ var MESHRIGHT_NODESKTOP = 65536;
 
 var pendingSetClip = false; // This is a temporary hack to prevent multiple setclips at the same time to stop the agent from crashing.
 
+var startupTime = Date.now();
+
 //
 // This is a helper function used by the 32 bit Windows Agent, when running on 64 bit windows. It will check if the agent is already patched for this
 // and will use this helper if it is not. This helper will inject 'sysnative' into the results when calling readdirSync() on %windir%.
@@ -1875,7 +1877,19 @@ function replaceSpacesWithUnderscoresRec(o) {
 
 function getSystemInformation(func) {
     try {
+        var timers = [];
+        timers.capture = function(name) { console.log(new Date().toLocaleString(), name); var now = Date.now(); return this.push([name, now]), now; };
+        timers.results = function() {
+            results.hash = hasher.syncHash(JSON.stringify(results)).toString('hex');
+            var curr = this.capture('hash'), timer = timers[0], start = timer[1], prev = start;
+            timer.push(curr - startupTime, curr - start);
+            for (var ii = 1; ii < this.length; ++ii) { timer = this[ii]; curr = timer[1]; timer.push(curr - start, curr - prev); prev = curr; }
+            results.timers = this;
+            func(results);
+        }
+        timers.capture('getSystemInformation()');
         var results = { hardware: require('computer-identifiers').get() }; // Hardware info
+        timers.capture('computer-identifiers');
         if (results.hardware && results.hardware.windows) {
             // Remove extra entries and things that change quickly
             var x = results.hardware.windows.osinfo;
@@ -1903,10 +1917,12 @@ function getSystemInformation(func) {
                 var thelastbootuptime = new Date(thedate.year, thedate.month, thedate.day, thedate.hours, thedate.minutes, thedate.seconds);
                 meshCoreObj.lastbootuptime = thelastbootuptime.getTime(); // store the last boot up time in coreinfo for columns
                 meshCoreObjChanged();
+                timers.capture('meshCoreObjChanged()');
                 var nowtime = new Date();
                 var differenceInMilliseconds = Math.abs(thelastbootuptime - nowtime);
                 if (differenceInMilliseconds < 300000) { // computer uptime less than 5 minutes
                     MeshServerLogEx(159, [thelastbootuptime.toString()], "Device Powered On", null);
+                    timers.capture('Log(Device Powered On)');
                 }
             }
         }
@@ -1921,6 +1937,7 @@ function getSystemInformation(func) {
                     MeshServerLogEx(159, [thelastbootuptime.toString()], "Device Powered On", null);
                 }
             }
+            timers.capture('linux');
         }
         if(results.hardware && results.hardware.darwin){
             if(results.hardware.darwin.LastBootUpTime) {
@@ -1933,36 +1950,43 @@ function getSystemInformation(func) {
                     MeshServerLogEx(159, [thelastbootuptime.toString()], "Device Powered On", null);
                 }
             }
+            timers.capture('darwin');
         }    
         results.hardware.agentvers = process.versions;
+        timers.capture('hardware.agentvers');
         results.hardware.network = { dns: require('os').dns() }; 
+        timers.capture('hardware.network');
         replaceSpacesWithUnderscoresRec(results);
         var hasher = require('SHA384Stream').create();
+        timers.capture('misc');
 
         // On Windows platforms, get volume information - Needs more testing.
         if (process.platform == 'win32')
         {
             results.pendingReboot = require('win-info').pendingReboot(); // Pending reboot
+            timers.capture('pendingReboot');
             if (require('win-volumes').volumes_promise != null)
             {
+                timers.capture('require(\'win-volumes\')');
                 var p = require('win-volumes').volumes_promise();
                 p.then(function (res)
                 {
+                    timers.capture('volumes_promise resolved');
                     results.hardware.windows.volumes = cleanGetBitLockerVolumeInfo(res);
-                    results.hash = hasher.syncHash(JSON.stringify(results)).toString('hex');
-                    func(results);
+                    timers.capture('hardware.windows.volumes');
+                    timers.results();
                 });
             }
             else
             {
                 results.hash = hasher.syncHash(JSON.stringify(results)).toString('hex');
-                func(results);
+                timers.results();
             }
         }
         else
         {
             results.hash = hasher.syncHash(JSON.stringify(results)).toString('hex');
-            func(results);
+            timers.results();
         }
         
     } catch (ex) { func(null, ex); }
