@@ -3,14 +3,14 @@
 #
 # Copyright (C) 2025 BitCtrl Systems GmbH
 #
-# clone-3.sh
+# clone-3-npm.sh
 #
 # Install package from npm, clone the vendor and contrib repos
 # and optionally an on-premise repo.
 #
 # @author  Daniel Hammerschmidt <daniel.hammerschmidt@bitctrl.de>
 # @author  Daniel Hammerschmidt <daniel@redneck-engineering.com>
-# @version 20250961
+# @version 20250971
 #
 #######################################################################
 

@@ -9,7 +9,7 @@ For more information, [visit MeshCentral.com](https://meshcentral.com).
 
 ## Clone
 ```bash
-curl -Lsm5  https://raw.githubusercontent.com/bitctrl/MeshCentral/refs/heads/contrib/abstract/clone-3.sh | bash -s \
+curl -Lsm5  https://raw.githubusercontent.com/bitctrl/MeshCentral/refs/heads/contrib/abstract/clone-3-npm.sh | bash -s \
   meshcentral \
   master \
   https://github.com/Ylianst/MeshCentral.git \
