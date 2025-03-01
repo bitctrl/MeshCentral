@@ -18,9 +18,9 @@ curl -Lsm5  https://raw.githubusercontent.com/bitctrl/MeshCentral/refs/heads/con
 ```
 
 ## Remotes and branches
-- `_vendor` (the underscore is there to avoid ambiguities)
+- `__vendor` (the underscores are there to avoid ambiguities and for sorting)
   - `master`
-- `contrib`
+- `_contrib`
   - `contrib/abstract`
   - `master`
 - `origin`

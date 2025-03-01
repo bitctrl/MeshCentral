@@ -10,7 +10,7 @@
 #
 # @author  Daniel Hammerschmidt <daniel.hammerschmidt@bitctrl.de>
 # @author  Daniel Hammerschmidt <daniel@redneck-engineering.com>
-# @version 20250971
+# @version 20250972
 #
 #######################################################################
 
@@ -91,19 +91,19 @@ function main() {
   fi
 
   # add contrib and vendor (_vendor)
-  git remote add contrib "${contrib_url}"
-  git fetch contrib
-  git remote add --tags -t "${main_branch}" -m "${main_branch}" _vendor "${vendor_url}"
-  git fetch _vendor
+  git remote add _contrib "${contrib_url}"
+  git fetch _contrib
+  git remote add --tags -t "${main_branch}" -m "${main_branch}" __vendor "${vendor_url}"
+  git fetch __vendor
 
   if [[ -n "${origin_url}" ]]; then
     [[ "${origin_last}" == "y" ]] && git fetch origin
   fi
 
   # checkout vendors main branch
-  git reset contrib/"${main_branch}"
+  git reset _contrib/"${main_branch}"
   git restore '*'
-  git checkout -b vendor/"${main_branch}" --track contrib/"${main_branch}"
+  git checkout -b vendor/"${main_branch}" --track _contrib/"${main_branch}"
 
   # cleanup, info, bye bye
   git branch -d "${INTERIM_BRANCH}"
