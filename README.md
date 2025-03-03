@@ -28,3 +28,17 @@ curl -Lsm5 https://github.com/bitctrl/MeshCentral/raw/refs/heads/contrib/abstrac
   - `contrib/abstract`
   - `vendor/master`
   - `feature/*`, `fix/*`, `draft/*`, `test/*`
+
+## Fork and contribute to [MeshCentral Plugins](https://github.com/topics/meshcentral-plugin)
+
+```
+cd meshcentral-data/plugins/routeplus/
+sudo -Hu $( stat -c %U . ) -- git init -b NULL --shared=group
+git config --global --add safe.directory "${PWD}"
+git remote add _contrib https://github.com/bitctrl/MeshCentral-RoutePlus.git
+git fetch _contrib
+git reset _contrib/master
+sudo -Hu $( stat -c %U . ) -- git restore '*'
+git checkout -b master --track _contrib/master
+git branch -d NULL
+```
