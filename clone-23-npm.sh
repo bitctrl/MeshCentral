@@ -6,11 +6,11 @@
 # clone-23-npm.sh
 #
 # Install package from npm, clone the vendor and contrib repos
-# and optionally an on-premise repo.
+# and optionally a detached (on-premise) repo.
 #
 # @author  Daniel Hammerschmidt <daniel.hammerschmidt@bitctrl.de>
 # @author  Daniel Hammerschmidt <daniel@redneck-engineering.com>
-# @version 20251011
+# @version 20251012
 #
 #######################################################################
 
