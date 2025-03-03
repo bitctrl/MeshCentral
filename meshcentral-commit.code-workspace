@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "contrib/abtract",
+			"path": "."
+		},
+		{
+			"path": "/home"
+		},
+		{
+			"path": "../meshcentral-data"
+		},
+		{
+			"name": "MeshCentral",
+			"path": "../node_modules/meshcentral"
+		}
+	],
+	"settings": {}
+}

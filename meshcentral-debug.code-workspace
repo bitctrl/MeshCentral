@@ -1,0 +1,31 @@
+{
+	"folders": [
+		{
+			"name": "contrib/abtract",
+			"path": "."
+		},
+		{
+			"path": "../meshcentral-data"
+		},
+		{
+			"name": "MeshCentral",
+			"path": "../node_modules/meshcentral"
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch MeshCentral",
+				"cwd": "${workspaceFolder}/..",
+				"program": "node_modules/meshcentral/meshcentral.js",
+				"request": "launch",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"type": "node"
+			}
+		]
+	},
+	"settings": {}
+}
