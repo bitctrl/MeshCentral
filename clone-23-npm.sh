@@ -67,7 +67,8 @@ function main() {
       function do_as_owner() {
         sudo -Hu "${owner}" -- "${@}"
       }
-      do_as_owner mkdir -pm 02775 node_modules
+      do_as_owner mkdir -p node_modules
+      do_as_owner chmod 02775 node_modules
     fi
   fi
 
@@ -79,7 +80,7 @@ function main() {
       read -srp "Token value: " tokenvalue
       printf '\r'
     fi
-    detached_last="$( yesno 'Fetch contrib and vendor before detached?' y )"
+    detached_last="$( yesno 'Fetch "contrib" and "vendor" before "detached"?' y )"
   fi
 
   set -x
@@ -88,7 +89,8 @@ function main() {
   [ ! -f "node_modules/${npm_package}/package.json" ] && do_as_owner npm install "${npm_package}"
   mv "node_modules/${npm_package}" "node_modules/_${npm_package}.npm"
 
-  do_as_owner mkdir -pm 02775 _abstract
+  do_as_owner mkdir -p _abstract
+  do_as_owner chmod 02775 _abstract
   cd _abstract
 
   # initialize repo in package dir
