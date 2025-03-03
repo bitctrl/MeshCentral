@@ -42,3 +42,18 @@ sudo -Hu $( stat -c %U . ) -- git restore '*'
 git checkout -b master --track _contrib/master
 git branch -d NULL
 ```
+
+## Sync remotes
+
+```
+cd _abstract
+sudo -Hu $( stat -c %U . ) -- git worktree add ../_vendor
+# ...
+```
+
+```
+cd _vendor
+git pull __vendor master:vendor/master
+git push _contrib vendor/master
+git push detached vendor/master
+```
