@@ -1,7 +1,9 @@
 # MeshCentral
 
 ## About
-This is forked from [Ylianst/MeshCentral](https://github.com/Ylianst/MeshCentral).
+[This repository](https://github.com/bitctrl/MeshCentral) ([vendor/master](https://github.com/bitctrl/MeshCentral/tree/vendor/master)) is a fork of [Ylianst/MeshCentral](https://github.com/Ylianst/MeshCentral). ([compare](https://github.com/Ylianst/MeshCentral/compare/master...bitctrl:MeshCentral:vendor/master))
+
+---
 
 MeshCentral is a full computer management web site. With MeshCentral, you can run your own web server to remotely manage and control computers on a local network or anywhere on the internet. Once you get the server started, create device group and download and install an agent on each computer you want to manage. A minute later, the new computer will show up on the web site and you can take control of it. MeshCentral includes full web-based remote desktop, terminal and file management capability.
 
@@ -18,12 +20,15 @@ curl -Lsm5  https://raw.githubusercontent.com/bitctrl/MeshCentral/refs/heads/con
 ```
 
 ## Remotes and branches
-- `__vendor` (the underscores are there to avoid ambiguities and for sorting)
+(the underscores are there to avoid ambiguities and for sorting)
+- `__vendor`
   - `master`
 - `_contrib`
   - `contrib/abstract`
-  - `master`
-- `origin`
-  - `agnostic`
+  - `vendor/master`
+  - `feature/*`, `fix/*`
+- `detached`
   - `contrib/abstract`
   - `vendor/master`
+  - `feature/*`, `fix/*`
+  - `prospect`
