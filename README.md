@@ -51,9 +51,12 @@ sudo -Hu $( stat -c %U . ) -- git worktree add ../_vendor
 # ...
 ```
 
-```
-cd _vendor
-git pull __vendor master:vendor/master
-git push _contrib vendor/master
-git push detached vendor/master
+```bash
+(
+  set -euo pipefail
+  git checkout vendor/master
+  git pull __vendor master:vendor/master
+  git push _contrib vendor/master
+  git push detached vendor/master
+)
 ```
