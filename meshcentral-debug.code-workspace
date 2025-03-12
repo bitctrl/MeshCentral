@@ -21,7 +21,8 @@
 				"program": "node_modules/meshcentral/meshcentral.js",
 				"request": "launch",
 				"skipFiles": [
-					"<node_internals>/**"
+					"<node_internals>/**",
+					"**/plugins/pluginhookscheduler/pluginhookscheduler.js"
 				],
 				"type": "node"
 			}
