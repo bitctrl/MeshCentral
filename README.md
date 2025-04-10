@@ -60,3 +60,8 @@ sudo -Hu $( stat -c %U . ) -- git worktree add ../_vendor
   git push detached vendor/master
 )
 ```
+
+## Restore git worktree
+```bash
+echo "gitdir: /opt/meshcentral/_abstract/.git/worktrees/meshcentral" > node_modules/meshcentral/.git
+```
