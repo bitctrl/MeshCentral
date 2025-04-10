@@ -1,19 +1,31 @@
 {
-	"folders": [
-		{
-			"name": "contrib/abtract-draft",
-			"path": "."
-		},
-		{
-			"path": "/home"
-		},
-		{
-			"path": "../meshcentral-data"
-		},
-		{
-			"name": "MeshCentral",
-			"path": "../node_modules/meshcentral"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "name": "contrib/abtract-draft",
+      "path": "."
+    },
+    {
+      "name": "_vendor",
+      "path": "../_vendor"
+    },
+    {
+      "path": "/home"
+    },
+    {
+      "path": "../meshcentral-data"
+    },
+    {
+      "name": "MeshCentral",
+      "path": "../node_modules/meshcentral"
+    }
+  ],
+  "settings": {
+    "workbench.colorCustomizations": {
+      "titleBar.activeBackground": "#006000",
+      "titleBar.activeForeground": "#cccccc",
+      "titleBar.inactiveBackground": "#004000",
+      "titleBar.inactiveForeground": "#9d9d9d",
+      "titleBar.border": "#006000"
+    }
+  }
 }

@@ -10,6 +10,9 @@
 		{
 			"name": "MeshCentral",
 			"path": "../node_modules/meshcentral"
+		},
+		{
+			"path": ".."
 		}
 	],
 	"launch": {
@@ -19,14 +22,29 @@
 				"name": "Launch MeshCentral",
 				"cwd": "${workspaceFolder}/..",
 				"program": "node_modules/meshcentral/meshcentral.js",
+				"_no-runtimeArgs": ["--preserve-symlinks", "--expose-internals"],
+				"env": {
+					"MESHCENTRAL_DEV_NO_AGENT_SIGNING": "1"
+				},
 				"request": "launch",
 				"skipFiles": [
 					"<node_internals>/**",
+					"**/node_modules/mongodb/**",
+				],
+				"_no-skipFiles": [
 					"**/plugins/pluginhookscheduler/pluginhookscheduler.js"
 				],
 				"type": "node"
 			}
 		]
 	},
-	"settings": {}
+  "settings": {
+    "workbench.colorCustomizations": {
+      "titleBar.activeBackground": "#606000",
+      "titleBar.activeForeground": "#cccccc",
+      "titleBar.inactiveBackground": "#404000",
+      "titleBar.inactiveForeground": "#9d9d9d",
+      "titleBar.border": "#606000"
+    }
+  }
 }
